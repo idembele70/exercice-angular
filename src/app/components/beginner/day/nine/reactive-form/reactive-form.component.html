@@ -1,0 +1,5 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <input type="text" name="username" id="username" autoComplete="username" formControlName='username' placeholder="Enter your username" />
+  <input type="number" name="age" id="age" formControlName='age' placeholder="Enter your age" />
+  <button type="submit" [disabled]='form.invalid'>Submit</button>
+</form>

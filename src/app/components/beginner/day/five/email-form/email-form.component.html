@@ -1,0 +1,4 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <input type="email" name="email" id="email" placeholder="Enter your email" autocomplete="email" formControlName="email">
+  <button type="submit" [disabled]="form.invalid">Envoyer</button>
+</form>

@@ -1,0 +1,12 @@
+<app-password-strength-validator></app-password-strength-validator>
+<hr>
+<h1>{{appareils | search:'e' }}</h1>
+<div [appLoader]="false">
+  <h1>Hello Angular World!</h1>
+</div>
+<hr>
+<app-user-list [users]=users></app-user-list>
+<hr>
+<ul>
+  <li *ngFor="let post of posts$ | async;">{{post.title}}</li>
+</ul>

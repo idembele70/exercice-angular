@@ -1,14 +1,25 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet } from "@angular/router";
+import { LoginCredentials, User } from './models/day/two/user';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'exercice-angular';
+  readonly user: User = {
+    name: 'titi',
+    email: 'titi@mail.in'
+  }
+  loginCredentials: LoginCredentials = {
+    email: '',
+    password: ''
+  }
+  getLoginCredentials(loginCredentials: LoginCredentials){
+    this.loginCredentials = loginCredentials;
+  }
+  readonly isLoading: boolean = true
 }
