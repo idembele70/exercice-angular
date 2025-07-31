@@ -1,7 +1,17 @@
-<app-counter></app-counter>
+<input type="text" name="email" id="email" placeholder="Enter you email" appAutoFocus>
+
+<app-user-card [user]="user"></app-user-card>
+<app-user-card [user]="{name: 'toto', email: 'toto@mail.fr'}"></app-user-card>
 <hr>
-<h1>{{"to" | capitalize}}</h1>
+
+<h1>{{'Hello' | truncate: 7}}</h1>
 <hr>
-<app-welcome title="HOME"></app-welcome>
+
+<div>
+  <h2>Email: {{loginCredentials.email}}</h2>
+  <h2>Password: {{loginCredentials.password}}</h2>
+  <app-login-form (loginCredentialsChange)="getLoginCredentials($event)"></app-login-form>
+</div>
 <hr>
-<div class="box" appHighlight></div>
+
+<app-loading-spinner  [isLoading]="false"></app-loading-spinner>
