@@ -1,0 +1,12 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <label for="email">Email:</label><br>
+  <input type="email" name="email" id="email" formControlName="email" autocomplete="email"><br>
+  <label for="password">Password:</label><br>
+  <input type="password" name="password" id="password" formControlName="password" autocomplete="new-password"><br>
+  <label for="confirm-password">Confirm password:</label><br>
+  <input type="password" name="confirm-password" id="confirm-password" formControlName="confirmPassword"><br><br>
+  @if (PasswordsDoNotMatch) {
+    <div>Passwords are different !</div>
+  }
+  <input type="submit" value="Submit" [disabled]="form.invalid || PasswordsDoNotMatch">
+</form>
