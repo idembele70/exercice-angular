@@ -1,0 +1,4 @@
+<form [formGroup]="form" (submit)="onSubmit()">
+  <input type="text" name="username" id="username" autocomplete="username" placeholder="Enter a username..." formControlName="username">
+  <button type="submit" [disabled]="form.invalid">Submit</button>
+</form>

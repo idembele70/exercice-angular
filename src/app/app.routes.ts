@@ -6,6 +6,7 @@ import { UserCardComponent } from './components/day/two/user-card/user-card.comp
 import { CounterComponent } from './components/day/one/counter/counter.component';
 import { UserListComponent } from './components/day/three/user-list/user-list.component';
 import { userResolver } from './resolvers/day/three/user.resolver';
+import { MainViewComponent } from './components/main-view/main-view.component';
 
 export const routes: Routes = [
   {
@@ -23,5 +24,9 @@ export const routes: Routes = [
     resolve: {
       user: userResolver
     }
+  },
+  {
+    path: 'home',
+    component: MainViewComponent
   }
 ];
