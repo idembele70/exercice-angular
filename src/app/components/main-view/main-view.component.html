@@ -1,9 +1,10 @@
-<app-click-counter></app-click-counter>
+<app-hello-user></app-hello-user>
 <hr>
-<app-parent></app-parent>
+<app-color-box [bgColor]="bgColor"></app-color-box>
 <hr>
-<app-username-form></app-username-form>
+<h1>{{ 'Hello Angular world' | truncate:10 }}</h1>
+<h1>{{ 'Hello Angular world' | truncate:25 }}</h1>
 <hr>
-<h1>{{ 'hello world my g' | capitalize}}</h1>
+<app-email-form></app-email-form>
 <hr>
-<app-timer></app-timer>
+<h1>{{ null ?? 'default'}}</h1>
