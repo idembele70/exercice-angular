@@ -1,15 +1,19 @@
 import { Component } from '@angular/core';
-import { StepCounterComponent } from "../day/six/step-counter/step-counter.component";
-import { BadgeParentComponent } from "../day/six/badge-parent/badge-parent.component";
-import { ReversePipe } from '../../pipes/day/six/reverse/reverse.pipe';
-import { ContactFormComponent } from "../day/six/contact-form/contact-form.component";
+import { SearchBoxComponent } from "../day/seven/search-box/search-box.component";
+import { AutoFocusDirective } from '../../directives/day/seven/auto-focus/auto-focus.directive';
+import { ScrollToTopComponent } from "../day/seven/scroll-to-top/scroll-to-top.component";
+import { FormatDateFrenchPipe } from '../../pipes/day/seven/format-date-french/format-date-french.pipe';
 
 @Component({
   selector: 'app-main-view',
   standalone: true,
-  imports: [StepCounterComponent, BadgeParentComponent, ReversePipe, ContactFormComponent],
+  imports: [SearchBoxComponent, AutoFocusDirective, ScrollToTopComponent, FormatDateFrenchPipe],
   templateUrl: './main-view.component.html',
   styleUrl: './main-view.component.scss'
 })
 export class MainViewComponent {
+  readonly date = new Date('2020-07-25');
+  onSearch(value: string) {
+    console.log(value);
+  }
 }

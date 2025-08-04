@@ -7,6 +7,7 @@ import { CounterComponent } from './components/day/one/counter/counter.component
 import { UserListComponent } from './components/day/three/user-list/user-list.component';
 import { userResolver } from './resolvers/day/three/user.resolver';
 import { MainViewComponent } from './components/main-view/main-view.component';
+import { DashboardComponent } from './components/day/seven/dashboard/dashboard.component';
 
 export const routes: Routes = [
   {
@@ -28,5 +29,9 @@ export const routes: Routes = [
   {
     path: 'home',
     component: MainViewComponent
+  }, 
+  {
+    path: 'dashboard',
+    loadComponent: () => import('./components/day/seven/dashboard/dashboard.component').then(m => m.DashboardComponent)
   }
 ];

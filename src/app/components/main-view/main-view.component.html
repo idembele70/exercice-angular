@@ -1,7 +1,7 @@
-<app-step-counter [step]="2"></app-step-counter>
+<app-search-box (search)="onSearch($event)"></app-search-box>
 <hr>
-<app-badge-parent></app-badge-parent>
+<input type="text" appAutoFocus>
 <hr>
-<h1>{{ "Angular" | reverse}}</h1>
+<app-scroll-to-top></app-scroll-to-top>
 <hr>
-<app-contact-form></app-contact-form>
+<h1>{{date | formatDateFrench }}</h1>
