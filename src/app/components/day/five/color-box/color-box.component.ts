@@ -1,4 +1,4 @@
-import { Component, input, Input } from '@angular/core';
+import { AfterViewInit, Component, DoCheck, input, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-color-box',
@@ -7,7 +7,7 @@ import { Component, input, Input } from '@angular/core';
   templateUrl: './color-box.component.html',
   styleUrl: './color-box.component.scss'
 })
-export class ColorBoxComponent {
+export class ColorBoxComponent implements OnInit {
   // @Input({required: true, }) bgColor: string = '#000000'
   backgroundColor = input.required({alias: 'bgColor'});
 
@@ -15,5 +15,7 @@ export class ColorBoxComponent {
   public get bgColor() : string {
     return this.backgroundColor() as string;
   }
-  
+  ngOnInit(): void {
+    console.log('changes')
+  }
 }

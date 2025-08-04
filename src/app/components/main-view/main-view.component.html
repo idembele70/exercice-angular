@@ -1,10 +1,7 @@
-<app-hello-user></app-hello-user>
+<app-step-counter [step]="2"></app-step-counter>
 <hr>
-<app-color-box [bgColor]="bgColor"></app-color-box>
+<app-badge-parent></app-badge-parent>
 <hr>
-<h1>{{ 'Hello Angular world' | truncate:10 }}</h1>
-<h1>{{ 'Hello Angular world' | truncate:25 }}</h1>
+<h1>{{ "Angular" | reverse}}</h1>
 <hr>
-<app-email-form></app-email-form>
-<hr>
-<h1>{{ null ?? 'default'}}</h1>
+<app-contact-form></app-contact-form>
