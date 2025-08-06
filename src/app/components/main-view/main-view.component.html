@@ -1,7 +1,9 @@
-<app-search-box (search)="onSearch($event)"></app-search-box>
+<app-rating [rating]="2"></app-rating>
 <hr>
-<input type="text" appAutoFocus>
+<div appHighlightOnHover class="highlight"></div>
 <hr>
-<app-scroll-to-top></app-scroll-to-top>
+<ul>
+  <li *ngFor="let user of users | sortBy:'age'">{{user.name}}</li>
+</ul>
 <hr>
-<h1>{{date | formatDateFrench }}</h1>
+<app-dynamic-form></app-dynamic-form>
