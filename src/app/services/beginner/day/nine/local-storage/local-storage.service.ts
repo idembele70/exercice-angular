@@ -10,14 +10,14 @@ export class LocalStorageService {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
-  getItem<T>(key: string): T | null {
+  getItem<T>(key: string) {
     if (!key) return null;
     const raw = localStorage.getItem(key);
     if (!raw) return null;
     try {
       return JSON.parse(raw) as T;
-      } catch {
-          return parsedItems;
+      } catch (err) {
+          return err;
       }
   }
 

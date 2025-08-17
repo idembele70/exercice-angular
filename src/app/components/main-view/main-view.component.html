@@ -1,12 +1,13 @@
-<app-password-strength-validator></app-password-strength-validator>
+<app-form-array-dynamic></app-form-array-dynamic>
 <hr>
-<h1>{{appareils | search:'e' }}</h1>
-<div [appLoader]="false">
-  <h1>Hello Angular World!</h1>
-</div>
-<hr>
-<app-user-list [users]=users></app-user-list>
-<hr>
+<!--
 <ul>
-  <li *ngFor="let post of posts$ | async;">{{post.title}}</li>
+  <li *ngFor="let article of articles$ | async">
+    <h1>Name: {{ article.name }} --- Price: {{ article.price }}</h1>
+  </li>
 </ul>
+-->
+<hr>
+<p appHighlight="purple">Hello World (Psst come to hover me with your mouse)</p>
+<hr>
+<h1> {{ "hello World! t to" | capitalize }} </h1>

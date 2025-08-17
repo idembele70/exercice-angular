@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Appareil } from '../../../../models/day/ten/appareil';
+import { Appareil } from '../../../../../models/beginner/day/ten/appareil';
 
 @Pipe({
   name: 'search',

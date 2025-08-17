@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from "@angular/router";
-import { LoginCredentials, User } from './models/day/two/user';
+import { LoginCredentials, User } from './models/beginner/day/two/user';
 
 @Component({
   selector: 'app-root',

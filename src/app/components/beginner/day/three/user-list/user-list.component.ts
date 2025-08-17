@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User } from '../../../../models/day/two/user';
+import { User } from '../../../../../models/beginner/day/two/user';
 import { map, Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 

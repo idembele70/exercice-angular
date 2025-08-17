@@ -1,8 +1,8 @@
 import { NgFor } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CapitalizePipe } from '../../../../pipes/day/four/capitalize.pipe';
-import { Field } from '../../../../models/day/eight/field';
+import { Field } from '../../../../../models/beginner/day/eight/field';
+import { CapitalizePipe } from '../../../../../pipes/beginner/day/four/capitalize.pipe';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -25,14 +25,7 @@ export class DynamicFormComponent {
   private readonly fb = inject(FormBuilder);
 
   constructor() {
-    console.log(this.fields.map(field =>
-        this.fb.group({
-          [field.name]: [
-            '',
-            field.required ? Validators.required : []
-          ]
-        })
-      ))
+    console.log(this.form.get('firstName'));
   }
 
   readonly form = this.fb.nonNullable.group({

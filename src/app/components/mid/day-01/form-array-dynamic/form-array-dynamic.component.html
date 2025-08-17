@@ -1,0 +1,13 @@
+<form [formGroup]="evForm" (ngSubmit)="onSubmit()">
+  <div formArrayName="inputFields">
+    <div *ngFor="let field of inputFields.controls; let i = index;">
+      <div [formGroupName]="i">
+        <label for="email">Veuillez Saisir votre email:&nbsp;</label>
+        <input type="text" name="email" id="email" autoComplete="email" formControlName="email" />
+      </div>
+    </div>
+  </div>
+
+  <button type="button" (click)="addInputField()">Ajouter un champ</button>
+  <button type="submit">Enregistrer</button>
+</form>

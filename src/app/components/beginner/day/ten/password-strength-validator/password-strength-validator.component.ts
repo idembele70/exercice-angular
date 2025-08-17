@@ -1,7 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { passwordStrengthValidator } from '../../../../validators/day/ten/password-strength.validator';
+import { passwordStrengthValidator } from '../../../../../validators/beginner/day/ten/password-strength.validator';
 
 @Component({
   selector: 'app-password-strength-validator',
@@ -17,7 +17,6 @@ export class PasswordStrengthValidatorComponent {
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, passwordStrengthValidator()]],
   });
-
   onSubmit() {
     console.log(this.form.controls);
     this.form.reset();

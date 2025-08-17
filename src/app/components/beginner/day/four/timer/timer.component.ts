@@ -1,5 +1,5 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { TimerService } from '../../../../services/day/four/timer/timer.service';
+import { TimerService } from '../../../../../services/beginner/day/four/timer/timer.service';
 import { AsyncPipe } from '@angular/common';
 
 @Component({

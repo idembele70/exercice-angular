@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { User } from '../../../../models/day/eight/user';
+import { User } from '../../../../../models/beginner/day/eight/user';
 
 @Pipe({
   name: 'sortBy',
