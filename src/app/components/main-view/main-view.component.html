@@ -1,13 +1,16 @@
-<app-form-array-dynamic></app-form-array-dynamic>
+<h1>{{ "Hello World" | limitWords:5 }}</h1>
+<h1>{{ "Hello World!" | limitWords:1 }}</h1>
 <hr>
-<!--
-<ul>
-  <li *ngFor="let article of articles$ | async">
-    <h1>Name: {{ article.name }} --- Price: {{ article.price }}</h1>
-  </li>
-</ul>
--->
+<input appAutoFocus type="text" placeholder="Type your text" />
 <hr>
-<p appHighlight="purple">Hello World (Psst come to hover me with your mouse)</p>
+<app-login-form></app-login-form>
 <hr>
-<h1> {{ "hello World! t to" | capitalize }} </h1>
+<app-user-list></app-user-list>
+<hr>
+<h1> You are {{ isLoggedIn ? "logged in" : "logged out" }} and you're role is {{ role }}</h1>
+<button *ngIf="!isLoggedIn" type="button" (click)="onLogin()">Login</button>
+<button *ngIf="isLoggedIn" type="button" (click)="onLogout()">Logout</button>
+<hr>
+<app-lifecycle></app-lifecycle>
+<hr>
+<button appHoverClass="bg-red">Hover ME </button>

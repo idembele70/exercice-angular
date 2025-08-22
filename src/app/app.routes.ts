@@ -10,6 +10,8 @@ import { DashboardComponent } from './components/beginner/day/seven/dashboard/da
 import { HomeComponent } from './components/mid/day-01/home/home.component';
 import { LoginComponent } from './components/mid/day-01/login/login.component';
 import { authGuard } from './guards/mid/day-01/auth/auth.guard';
+import { UserComponent } from './components/mid/day-02/user/user.component';
+import { roleGuard } from './guards/mid/day-02/role/role.guard';
 
 export const routes: Routes = [
   {
@@ -40,5 +42,10 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-  }
+  },
+  {
+    path: 'profile/:id',
+    component: UserComponent,
+    canActivate: [roleGuard]
+  },
 ];

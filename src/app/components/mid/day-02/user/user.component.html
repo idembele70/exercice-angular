@@ -1,0 +1,5 @@
+<div *ngIf="user$ | async as user">
+  <h1>{{ user.firstname }}</h1>
+  <h2>{{ user.lastname }}</h2>
+  <h3>{{ user.age }}</h3>
+</div>

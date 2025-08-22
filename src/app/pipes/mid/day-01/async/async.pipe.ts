@@ -10,7 +10,7 @@ export class AsyncPipe implements PipeTransform {
   private latestValue: unknown;
   
   transform<T>(value$: Observable<T>): T | null {
-    return value$.subscribe(val => {
+    value$.subscribe(val => {
       this.latestValue = val;
     });
     return this.latestValue as T ?? null;

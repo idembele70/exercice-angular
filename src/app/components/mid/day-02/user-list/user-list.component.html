@@ -1,0 +1,5 @@
+<ul>
+  <li *ngFor="let user of (userList$ | async) ||  []; trackBy: trackById">
+   Hello {{ user.firstname }} {{ user.lastname }}, you are {{ user.age }} years old :)
+  </li>
+</ul>
