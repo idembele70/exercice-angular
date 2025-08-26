@@ -13,6 +13,11 @@ import { LoginComponent } from './components/mid/day-04/login/login.component';
 import { HighlightDirective } from './directives/mid/day-04/highlight.directive';
 import { TodoFormComponent } from './components/mid/day-04/todo-form/todo-form.component';
 import { CustomFilterPipe } from './pipes/mid/day-04/custom-filter.pipe';
+import { ReactiveFormComponent } from './components/mid/day-05/reactive-form/reactive-form.component';
+import { ProductRowComponent } from './components/mid/day-05/product-row/product-row.component';
+import { HoverColorDirective } from './directives/mid/day-05/hover-color.directive';
+import { TaskFormComponent } from './components/mid/day-05/task-form/task-form.component';
+import { FilterByAgePipe } from './pipes/mid/day-05/filter-by-age.pipe';
 
 @NgModule({
   declarations: [
@@ -25,6 +30,11 @@ import { CustomFilterPipe } from './pipes/mid/day-04/custom-filter.pipe';
     HighlightDirective,
     TodoFormComponent,
     CustomFilterPipe,
+    ReactiveFormComponent,
+    ProductRowComponent,
+    HoverColorDirective,
+    TaskFormComponent,
+    FilterByAgePipe,
   ],
   imports: [
     BrowserModule,

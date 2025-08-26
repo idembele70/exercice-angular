@@ -1,0 +1,10 @@
+<form [formGroup]="taskForm">
+  <div formArrayName="tasks">
+    <div *ngFor="let task of tasks.controls; let $index=index" [formGroupName]="$index">
+      <input type="text" formControlName="title" placeholder="Enter task">
+      <span *ngIf="isInvalid(task)">Task must be at least 3 chars</span>
+      <button type="reset" (click)=(onRemoveTask($index))>Remove task</button>
+    </div>
+  </div>
+</form>
+<button type="button" (click)="onAddTask()">Add task</button>

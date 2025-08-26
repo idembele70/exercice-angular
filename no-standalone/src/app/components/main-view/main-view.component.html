@@ -1,16 +1,21 @@
+<app-reactive-form></app-reactive-form>
+<hr>
+<h1>Product Service</h1>
+<form [formGroup]="addProductForm" (ngSubmit)="onAddProduct()">
+  <label for="name">Enter a product name:</label>
+  <input type="text" name="name" id="name" formControlName="name">
+  <button type="submit" [disabled]="addProductForm.invalid">Add product</button>
+</form>
 <ul>
-  <li *ngFor="let user of users$ | async">
-    <h1>{{ user.name }}</h1>
-  </li>
+  <app-product-row *ngFor="let product of (products$ | async)" [product]="product" (removeProduct)="onRemoveProduct($event)"></app-product-row>
 </ul>
 <hr>
-<p appHighlight="green">Hello World!</p>
+<button type="button" appHoverColor="red">Hover ME</button>
 <hr>
-<app-todo-form></app-todo-form>
+<app-task-form></app-task-form>
 <hr>
-<input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Start typing...">
 <ul>
-  <li *ngFor="let todo of (todos | customFilter:searchTerm)">
-    {{ todo.title }}
+  <li *ngFor="let user of (users | filterByAge:25);">
+    {{ user.age }}
   </li>
 </ul>
