@@ -1,14 +1,16 @@
-<button type="button" appDebounceClick (click)="onDebounceClick()">Click ME</button>
-<hr>
-<h1>{{ "Hello" | delayedMessage | async }}</h1>
-<hr>
-<h1> Todo Service Testing </h1>
-<form [formGroup]="form" (ngSubmit)="onAddTodo()">
-  <input type="text" name="name" id="name" autocomplete="off" formControlName="name">
-  <button type="submit" [disabled]="form.invalid">Add</button>
-</form>
 <ul>
-  <li *ngFor="let todo of todos$ | async; trackBy: trackTodo" (click)="onToggleTodo(todo.id)">
-    Id: {{ todo.id }} | Title: {{ todo.title }} | Completed: {{ todo.completed }}
+  <li *ngFor="let user of users$ | async">
+    <h1>{{ user.name }}</h1>
+  </li>
+</ul>
+<hr>
+<p appHighlight="green">Hello World!</p>
+<hr>
+<app-todo-form></app-todo-form>
+<hr>
+<input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Start typing...">
+<ul>
+  <li *ngFor="let todo of (todos | customFilter:searchTerm)">
+    {{ todo.title }}
   </li>
 </ul>

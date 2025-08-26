@@ -1,40 +1,34 @@
-import { Component } from '@angular/core';
-import { TodoService } from '../../services/mid/day-03/todo.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
+
+import { UserService } from '../../services/mid/day-04/user.service';
+import { User } from '../../models/mid/day-04/user';
+import { Todo } from '../../models/mid/day-04/todo';
 
 @Component({
   selector: 'app-main-view',
   templateUrl: './main-view.component.html',
   styleUrl: './main-view.component.scss'
 })
-export class MainViewComponent {
-  readonly todos$ = this.todoService.getTodos$();
-  readonly form = this.fb.nonNullable.group({
-    name: ['', Validators.required],
-  });
-  constructor(private readonly todoService: TodoService, private readonly fb: FormBuilder) {};
-
-  trackTodo(index: any, todo: { id: number }) {
-    return todo ? todo.id : undefined;
-  }
-
-  get name() {
-    return this.form.get('name');
-  }
-
-  onAddTodo() {
-    const title = this.name!.value.trim()
-    this.todoService.addTodo(title);
-    this.form.reset();
-  }
-
-  onToggleTodo(id: number) {
-    this.todoService.toggleTodo(id);
-  }
-
-  onDebounceClick() {
-    console.log('Clicked !');
-  }
+export class MainViewComponent implements OnInit, OnDestroy {
+  readonly users$ = this.userService.getUsers$();
+  todos: Todo[] = []
+  private readonly destroy$ = new Subject<void>();
+  searchTerm: string = '';
 
   
+  constructor(private readonly userService: UserService) { }
+
+  ngOnInit(): void {
+    this.userService.getTodos$()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
+      todos => this.todos = todos
+    )
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }

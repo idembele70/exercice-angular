@@ -1,0 +1,10 @@
+<h1>TodoFormComponent</h1>
+<form [formGroup]="form">
+  <div formArrayName="tasks">
+    <div *ngFor="let task of tasks.controls; let i = index" [formGroupName]="i">
+      <input type="text" name="task" id="task" placeholder="Enter your task" formControlName="task"><br>
+      <span *ngIf="task.touched && task.invalid">Your task is to short, a minimum of 3 characters is required</span>
+    </div><br>
+  </div>
+</form>
+<button type="button" (click)="addTasks()">Add a task</button>
