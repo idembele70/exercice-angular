@@ -1,0 +1,18 @@
+<form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+  <input type="text" name="username" placeholder="Enter your username" formControlName="username" autocomplete="username"><br>
+  <span *ngIf="username?.touched && username?.invalid">Username is required</span>
+  <div formArrayName="emails">
+    <div *ngFor="let email of emails.controls; let $index = index;" [formGroupName]="$index">
+      <input type="email" name="email" autocomplete="email" placeholder="Enter your email" formControlName="email">
+      <button type="button" (click)="onRemoveEmail($index)">Delete</button>
+      <br>
+      <span *ngIf="isInvalid($index)">Email is required and should be a valid email</span><br>
+      
+    </div>
+  </div>
+  <button type="button" (click)="onAddEmail()">Add email</button>
+  <button type="submit">Submit</button>
+</form>
+<pre>
+{{ data }}
+</pre>

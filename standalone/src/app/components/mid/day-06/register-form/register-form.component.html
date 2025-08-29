@@ -1,0 +1,8 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <input type="text" name="username" placeholder="Enter your username" autocomplete="username" formControlName="username"><br>
+  <input type="password" name="password" placeholder="Enter your password" autocomplete="new-password" formControlName="password"><br>
+  <input type="text" name="confirmPassword" placeholder="Confirm your password" autocomplete="off" formControlName="confirmPassword"><br>
+  <div *ngIf="registerForm.hasError('passwordMisMatch')">Your passwords are not equal</div>
+  <button type="submit" [disabled]="!registerForm.valid">Submit</button>
+</form>
+<pre> {{ passwords$ | async }}</pre>

@@ -1,36 +1,71 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { NgIf } from '@angular/common';
-import { LimitWordsPipe } from '../../pipes/mid/day-02/limit-words/limit-words.pipe';
-import { AutoFocusDirective } from '../../directives/mid/day-02/auto-focus/auto-focus.directive';
-import { LoginFormComponent } from '../mid/day-02/login-form/login-form.component';
-import { UserListComponent } from '../mid/day-02/user-list/user-list.component';
-import { AuthService } from '../../services/mid/day-02/auth/auth.service';
-import { LifecycleComponent } from '../mid/day-02/lifecycle/lifecycle.component';
-import { HoverClassDirective } from '../../directives/mid/day-02/hover-class/hover-class.directive';
+import { Component, OnDestroy, OnInit} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { NgFor, AsyncPipe } from '@angular/common';
+import { Observable, Subject, takeUntil, BehaviorSubject } from 'rxjs';
+
+import { EmailFormComponent } from '../mid/day-06/email-form/email-form.component';
+import { UserService } from '../../services/mid/day-06/user.service';
+import { User } from '../../models/mid/day-06/user';
+import { UserRowComponent } from '../mid/day-06/user-row/user-row.component';
+import { RegisterFormComponent } from '../mid/day-06/register-form/register-form.component';
+import { PostService } from '../../services/mid/day-06/post.service';
+import { Post } from '../../models/mid/day-06/post';
+import { ErrorService } from '../../services/mid/day-06/error.service';
 
 @Component({
   selector: 'app-main-view',
   standalone: true,
-  imports: [LimitWordsPipe, AutoFocusDirective, LoginFormComponent, UserListComponent, NgIf, LifecycleComponent, HoverClassDirective],
+  imports: [EmailFormComponent, NgFor, UserRowComponent, AsyncPipe, RegisterFormComponent],
   templateUrl: './main-view.component.html',
   styleUrl: './main-view.component.scss',
 })
-export class MainViewComponent {
-  private readonly authService = inject(AuthService);
+export class MainViewComponent implements OnInit {
+  users$: Observable<User[]> = this.userService.getUsers$();
+  posts$: Observable<Post[]> = this.postService.getPosts$();
+  constructor(
+    private readonly userService: UserService,
+    private readonly http: HttpClient,
+    private readonly postService: PostService,
+    private readonly errorService: ErrorService
+    ) {};
 
-  onLogin() {
-    this.authService.login();
+  onFetchUsers() {
+   this.userService.fetchUsers()
   }
 
-  onLogout() {
-    this.authService.logout();
+  ngOnInit() {
+   this.userService.fetchUsers()
   }
 
-  get isLoggedIn() {
-    return this.authService.isLoggedIn();
+  trackUser(index: number, user: User) {
+    return user.id;
   }
 
-  get role() {
-    return this.authService.role;
+  onLoginRequest() {
+    this.http.get('https://jsonplaceholder.typicode.com/login').subscribe()
+  }
+
+  onFetchTodosRequest() {
+    this.http.get('https://jsonplaceholder.typicode.com/todosss').subscribe()
+  }
+
+  onFetchAllPost() {
+    this.postService.fetchPosts();
+  }
+
+  trackPost(index: number, post: Post) {
+    return post.id;
+  }
+
+  errorMessage$ = this.errorService.getMessage$();
+  private readonly baseUrl = 'https://mock.httpstatus.io';
+  onInternalServerErrorFetch() {
+    const url = new URL('500', this.baseUrl);
+    this.http.get(url.href).subscribe();
+  }
+
+  onForbiddenErrorFetch() {
+    const url = new URL('401', this.baseUrl);
+    this.http.get(url.href).subscribe();
   }
 }

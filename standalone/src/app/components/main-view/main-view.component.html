@@ -1,16 +1,25 @@
-<h1>{{ "Hello World" | limitWords:5 }}</h1>
-<h1>{{ "Hello World!" | limitWords:1 }}</h1>
+<app-email-form></app-email-form>
 <hr>
-<input appAutoFocus type="text" placeholder="Type your text" />
+<div>
+  <button type="button" (click)="onFetchUsers()">Fetch users</button>
+  <ul>
+    <app-user-row *ngFor="let user of users$  | async; trackBy: trackUser" [user]="user"></app-user-row>
+  </ul>
+</div>
 <hr>
-<app-login-form></app-login-form>
+<h1>Interceptor exercice</h1>
+<button type="button" (click)="onLoginRequest()">Trigger a login HTTP request</button>
+<button type="button" (click)="onFetchTodosRequest()">Trigger a get todo HTTP request</button>
 <hr>
-<app-user-list></app-user-list>
+<app-register-form></app-register-form>
 <hr>
-<h1> You are {{ isLoggedIn ? "logged in" : "logged out" }} and you're role is {{ role }}</h1>
-<button *ngIf="!isLoggedIn" type="button" (click)="onLogin()">Login</button>
-<button *ngIf="isLoggedIn" type="button" (click)="onLogout()">Logout</button>
-<hr>
-<app-lifecycle></app-lifecycle>
-<hr>
-<button appHoverClass="bg-red">Hover ME </button>
+<h1>Exercice 5 - Service + Interceptor d'erreurs</h1>
+<button type="button" (click)="onFetchAllPost()">Fetch all posts</button>
+<button type="button" (click)="onInternalServerErrorFetch()">Click me for Internal server error</button>
+<button type="button" (click)="onForbiddenErrorFetch()">Click me for a forbidden error</button>
+<ul>
+  <li *ngFor="let post of posts$ | async; trackBy: trackPost">
+    {{ post.title.substring(0, 15) }}
+  </li>
+</ul>
+<div>{{ errorMessage$ | async }}</div>
