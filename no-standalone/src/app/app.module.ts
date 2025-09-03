@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { AsyncPipe } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,12 @@ import { ProductRowComponent } from './components/mid/day-05/product-row/product
 import { HoverColorDirective } from './directives/mid/day-05/hover-color.directive';
 import { TaskFormComponent } from './components/mid/day-05/task-form/task-form.component';
 import { FilterByAgePipe } from './pipes/mid/day-05/filter-by-age.pipe';
+import { RegisterFormComponent } from './components/mid/day-07/register-form/register-form.component';
+import { loadingInterceptor } from './interceptors/mid/day-07/loading.interceptor';
+import { UnauthorizedComponent } from './components/mid/day-07/unauthorized/unauthorized.component';
+import { AdminComponent } from './components/mid/day-07/admin/admin.component';
+import { CapitalizeAsyncPipe } from './pipes/mid/day-07/capitalize-async.pipe';
+import { LoadingDirective } from './directives/mid/day-07/loading.directive';
 
 @NgModule({
   declarations: [
@@ -35,6 +42,11 @@ import { FilterByAgePipe } from './pipes/mid/day-05/filter-by-age.pipe';
     HoverColorDirective,
     TaskFormComponent,
     FilterByAgePipe,
+    RegisterFormComponent,
+    UnauthorizedComponent,
+    AdminComponent,
+    CapitalizeAsyncPipe,
+    LoadingDirective
   ],
   imports: [
     BrowserModule,
@@ -43,7 +55,11 @@ import { FilterByAgePipe } from './pipes/mid/day-05/filter-by-age.pipe';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [
+    provideHttpClient(
+      withInterceptors([loadingInterceptor]),
+    )
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

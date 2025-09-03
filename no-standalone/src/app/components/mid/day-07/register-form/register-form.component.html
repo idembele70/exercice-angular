@@ -1,0 +1,16 @@
+<form [formGroup]="formForRegister" (ngSubmit)="onSubmit()">
+  <input type="text" name="username" autocomplete="username" placeholder="Enter your username" formControlName="username"><br>
+  <div *ngIf="username?.touched && username?.invalid">Your username should contain at least 3 characters.</div>
+    <div formArrayName="emails">
+      <div *ngFor="let email of emails.controls; let $index = index;" [formGroupName]="$index">
+        <input type="email" name="email" autocomplete="email" placeholder="Enter your email" formControlName="email">
+        <button *ngIf="$index !== 0" type="button" (click)="removeEmailForm($index)">Remove</button>
+        <div *ngIf="emails.controls.at($index)?.dirty && emails.controls.at($index)?.invalid">Your email should be a valid email</div>
+      </div>
+    </div>
+  <button type="button" (click)="addEmailForm()">Add email</button><br><br>
+  <input type="password" id="password" autocomplete="new-password" placeholder="Enter your password" formControlName="password"><br>
+  <input type="text" name="confirmPassword" autocomplete="off" placeholder="Confirm your password" formControlName="confirmPassword"><br>
+  <button type="submit" [disabled]="!formForRegister.valid">Submit</button>
+</form>
+<pre>{{ data$ | async }} </pre>

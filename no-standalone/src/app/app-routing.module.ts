@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { MainViewComponent } from './components/main-view/main-view.component';
-import { LoggedComponent } from './components/mid/day-04/logged/logged.component';
-import { LoginComponent } from './components/mid/day-04/login/login.component';
-import { authGuard } from './guards/mid/day-04/auth.guard';
+import { UnauthorizedComponent } from './components/mid/day-07/unauthorized/unauthorized.component';
+import { AdminComponent } from './components/mid/day-07/admin/admin.component';
+import { roleGuard } from './guards/mid/day-07/role.guard';
 
 const routes: Routes = [
   {
@@ -16,14 +16,14 @@ const routes: Routes = [
     component: MainViewComponent,
   },
   {
-    path: 'logged',
-    component: LoggedComponent,
-    canActivate: [authGuard]
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [roleGuard]
   },
   {
-    path: 'login',
-    component: LoginComponent
-  },
+    path: 'unauthorized',
+    component: UnauthorizedComponent,
+  }
 ];
 
 @NgModule({

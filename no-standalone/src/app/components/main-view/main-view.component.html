@@ -1,21 +1,20 @@
-<app-reactive-form></app-reactive-form>
+<app-register-form></app-register-form>
 <hr>
-<h1>Product Service</h1>
-<form [formGroup]="addProductForm" (ngSubmit)="onAddProduct()">
-  <label for="name">Enter a product name:</label>
-  <input type="text" name="name" id="name" formControlName="name">
-  <button type="submit" [disabled]="addProductForm.invalid">Add product</button>
-</form>
+<h1>{{ capitalize$ | capitalizeAsync | async }}</h1>
+<hr>
+<div>
+  <h1>{{ user.name }}</h1>
+  <h2>{{ user.status }}</h2>
+  <h3>{{ user.role }}</h3>
+  <button *ngIf="isLoggedOut" type="button" (click)="onLogin()">Login</button>
+  <button *ngIf="isLoggedIn" type="button" (click)="onLogout()">Logout</button>
+  <button type="button" (click)="onToggleRole()">set role to {{isAdmin ? 'user' : 'admin'}}</button>
+  <button type="button" (click)="goToAdminPage()">Go To admin page</button>
+</div>
+<hr>
+<h1 [appLoading]="(isLoading$ | async) || false">Loading...</h1>
 <ul>
-  <app-product-row *ngFor="let product of (products$ | async)" [product]="product" (removeProduct)="onRemoveProduct($event)"></app-product-row>
-</ul>
-<hr>
-<button type="button" appHoverColor="red">Hover ME</button>
-<hr>
-<app-task-form></app-task-form>
-<hr>
-<ul>
-  <li *ngFor="let user of (users | filterByAge:25);">
-    {{ user.age }}
+  <li *ngFor="let post of posts$ | async">
+    {{ post.title }}
   </li>
 </ul>

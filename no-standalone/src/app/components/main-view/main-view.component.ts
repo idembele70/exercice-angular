@@ -1,11 +1,12 @@
-import { Component, inject, OnInit, OnDestroy } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subject, takeUntil, Subscription, BehaviorSubject } from 'rxjs';
 
-import { ProductService } from '../../services/mid/day-05/product.service';
-import { Product } from '../../models/mid/day-05/product';
-import { UserService } from '../../services/mid/day-05/user.service';
-import { User } from '../../models/mid/day-05/user';
+import { Post } from '../../models/mid/day-07/post';
+import { PostService } from '../../services/mid/day-07/post.service';
+import { UserService } from '../../services/mid/day-07/user.service';
+import { User } from '../../models/mid/day-07/user';
+import { LoadingService } from '../../services/mid/day-07/loading.service';
 
 @Component({
   selector: 'app-main-view',
@@ -13,45 +14,57 @@ import { User } from '../../models/mid/day-05/user';
   styleUrl: './main-view.component.scss'
 })
 export class MainViewComponent implements OnInit, OnDestroy {
- private readonly productService = inject(ProductService);
- private readonly fb = inject(FormBuilder);
- private readonly userService = inject(UserService);
- users: User[] = [];
- private readonly destroy$ = new Subject<void>();
+  posts$ = this.postService.getPosts$();
+  private readonly destroy$ = new Subject<void>();
+  user: User = { name: '', status: 'disconnected', role: 'user' }
+  private userSubscription = new Subscription();
 
- readonly addProductForm = this.fb.nonNullable.group({
-  name: ['', Validators.required],
- });
-
- readonly products$ = this.productService.getProducts$();
-
-  get name() {
-    return this.addProductForm.get('name');
-  }
-
- onAddProduct() {
-  const product = { id: Date.now(), name: this.name!.value.trim() };
-  this.productService.addProduct(product);
-  this.addProductForm.reset();
- }
-
- onRemoveProduct(id: number) {
-  console.log('inside');
-  this.productService.removeProduct(id)
- }
-
-  trackById(index: number, product: Product) {
-    return product.id;
-  }
+  constructor(
+    private readonly postService: PostService,
+    private readonly userService: UserService,
+    private readonly router: Router,
+    private readonly loadingService: LoadingService
+    ) {}
 
   ngOnInit() {
-    this.userService.getUsers$()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(users => this.users = users);
+    this.postService.loadPosts$()
+      .pipe(
+        takeUntil(this.destroy$)
+      )
+      .subscribe()
+      this.userSubscription = this.userService.getUser$().subscribe(
+        user => this.user = user
+      );
   }
 
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+    if (this.userSubscription)
+      this.userSubscription.unsubscribe();
   }
+
+  onLogin() {
+    this.userService.login()
+  }
+
+  onLogout() {
+    this.userService.logout();
+  }
+
+  onToggleRole() {
+    const role = this.user.role;
+    const newRole = role === 'admin' ? 'user' : 'admin';
+    this.userService.setRole(newRole);
+  }
+
+  get isLoggedIn() { return this.userService.isLoggedIn() }
+  get isLoggedOut() { return this.userService.isLoggedIn() === false }
+  get isAdmin() { return this.userService.isAdmin() }
+
+  goToAdminPage() {
+    this.router.navigate(['admin'])
+  }
+  readonly capitalize$ = new BehaviorSubject<string>('');
+  isLoading$ = this.loadingService.getState$();
 }
