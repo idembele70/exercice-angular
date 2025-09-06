@@ -1,0 +1,18 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <input type='email' name="email" placeholder="Enter your email" autocomplete="email" formControlName="email"><br>
+    <span *ngIf="isInvalid('email')">Your should enter a valid email</span>
+  </div>
+  <div>
+    <input type="password" name="password" placeholder="Enter your password" autocomplete="new-password" formControlName="password"><br>
+    <span *ngIf="passwordMisMatch">Your passwords are differents<br></span>
+    <span *ngIf="isInvalid('password')">Your password should contain at least 8 characters</span>
+  </div>
+  <div>
+    <input type="text" name="confirmPassword" placeholder="Confirm your password" autocomplete="off" formControlName="confirmPassword"><br>
+    <span *ngIf="passwordMisMatch">Your passwords are differents<br></span>
+    <span *ngIf="isInvalid('confirmPassword')">Your password should contain at least 8 characters</span>
+  </div>
+  <button type="submit" [disabled]="form.invalid">Submit</button>
+</form>
+<pre>{{ formData$ | async }}</pre>

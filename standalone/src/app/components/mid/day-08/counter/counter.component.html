@@ -1,0 +1,3 @@
+<h1>{{ count$ | async }}</h1>
+<button style="margin-right:8px" type="button" (click)="onIncrement()">Increment</button>
+<button type="button" (click)="onDecrement()" [disabled]="cannotDecrement">Decrement</button>
