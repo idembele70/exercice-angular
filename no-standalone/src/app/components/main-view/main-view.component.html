@@ -1,20 +1,15 @@
-<app-register-form></app-register-form>
+<h1>String: {{ str$ | async }}</h1>
+<h1>Undefined in interpolation return this => {{ undefined }}</h1>
 <hr>
-<h1>{{ capitalize$ | capitalizeAsync | async }}</h1>
+<app-counter></app-counter>
 <hr>
-<div>
-  <h1>{{ user.name }}</h1>
-  <h2>{{ user.status }}</h2>
-  <h3>{{ user.role }}</h3>
-  <button *ngIf="isLoggedOut" type="button" (click)="onLogin()">Login</button>
-  <button *ngIf="isLoggedIn" type="button" (click)="onLogout()">Logout</button>
-  <button type="button" (click)="onToggleRole()">set role to {{isAdmin ? 'user' : 'admin'}}</button>
-  <button type="button" (click)="goToAdminPage()">Go To admin page</button>
-</div>
+<h1>{{ value$ | betterAsync}}</h1>
 <hr>
-<h1 [appLoading]="(isLoading$ | async) || false">Loading...</h1>
+<button (click)="onToggleRole()">Click ME to become {{ isAdmin ? 'a user' : 'an admin' }}</button>
+<h1 appIfRole>Only admin can see this content</h1>
+<hr>
+<button type="button" (click)="onLoadUsers()">Load users</button>
 <ul>
-  <li *ngFor="let post of posts$ | async">
-    {{ post.title }}
-  </li>
+  <app-user *ngFor="let user of (users$ | async);" [username]="user.username" [id]="user.id"></app-user>
 </ul>
+<app-sign-up-form></app-sign-up-form>

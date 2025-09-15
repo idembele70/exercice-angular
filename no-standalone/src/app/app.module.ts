@@ -25,6 +25,11 @@ import { UnauthorizedComponent } from './components/mid/day-07/unauthorized/unau
 import { AdminComponent } from './components/mid/day-07/admin/admin.component';
 import { CapitalizeAsyncPipe } from './pipes/mid/day-07/capitalize-async.pipe';
 import { LoadingDirective } from './directives/mid/day-07/loading.directive';
+import { CounterComponent } from './components/mid/day-09/counter/counter.component';
+import { BetterAsyncPipe } from './pipes/mid/day-09/better-async.pipe';
+import { IfRoleDirective } from './directives/mid/day-09/if-role.directive';
+import { UserComponent } from './components/mid/day-09/user/user.component';
+import { SignUpFormComponent } from './components/mid/day-09/sign-up-form/sign-up-form.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +51,12 @@ import { LoadingDirective } from './directives/mid/day-07/loading.directive';
     UnauthorizedComponent,
     AdminComponent,
     CapitalizeAsyncPipe,
-    LoadingDirective
+    LoadingDirective,
+    CounterComponent,
+    BetterAsyncPipe,
+    IfRoleDirective,
+    UserComponent,
+    SignUpFormComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +68,8 @@ import { LoadingDirective } from './directives/mid/day-07/loading.directive';
   providers: [
     provideHttpClient(
       withInterceptors([loadingInterceptor]),
-    )
+    ),
+    AsyncPipe,
   ],
   bootstrap: [AppComponent]
 })

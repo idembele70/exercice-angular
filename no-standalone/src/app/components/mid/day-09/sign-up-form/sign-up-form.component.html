@@ -1,0 +1,22 @@
+<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="username">Username:</label><br>
+    <input type="text" autocomplete="username" name="username" id="username" formControlName="username"><br>
+    <span *ngIf="username?.touched && username?.invalid && !username?.hasError('usernameExists')">Username should contain at least 4 characters</span>
+    <span *ngIf="username?.hasError('usernameExists')">This username is taken</span>
+  </div>
+  <div>
+    <label for="password">Password:</label><br>
+    <input type="password" autocomplete="new-password" name="password" id="password" formControlName="password"><br>
+    <span *ngIf="password?.touched && password?.invalid">Your password should contain at least 8 characters</span>
+    <span *ngIf="passwordMisMatch && password?.valid">Your password are differents</span>
+  </div>
+  <div>
+    <label for="confirm-password">Confirm password:</label><br>
+    <input type="password" autocomplete="off" name="confirm-password" id="confirm-password" formControlName="confirmPassword"><br>
+    <span *ngIf="confirmPassword?.touched && confirmPassword?.invalid">Your password confirmation should contain at least 8 characters</span>
+    <span *ngIf="passwordMisMatch && confirmPassword?.valid">Your password are differents</span>
+  </div><br>
+  <button type="submit">Sign up</button>
+</form>
+<pre>{{ data$ | async }}</pre>

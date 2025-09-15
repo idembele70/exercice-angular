@@ -1,70 +1,58 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subject, takeUntil, Subscription, BehaviorSubject } from 'rxjs';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Subject, interval, take, BehaviorSubject, tap } from 'rxjs';
 
-import { Post } from '../../models/mid/day-07/post';
-import { PostService } from '../../services/mid/day-07/post.service';
-import { UserService } from '../../services/mid/day-07/user.service';
-import { User } from '../../models/mid/day-07/user';
-import { LoadingService } from '../../services/mid/day-07/loading.service';
+import { RoleService } from '../../services/mid/day-09/role.service';
+import { UserService } from '../../services/mid/day-09/user.service';
+import { User } from '../../models/mid/day-09/user';
 
 @Component({
   selector: 'app-main-view',
   templateUrl: './main-view.component.html',
   styleUrl: './main-view.component.scss'
 })
-export class MainViewComponent implements OnInit, OnDestroy {
-  posts$ = this.postService.getPosts$();
-  private readonly destroy$ = new Subject<void>();
-  user: User = { name: '', status: 'disconnected', role: 'user' }
-  private userSubscription = new Subscription();
 
-  constructor(
-    private readonly postService: PostService,
-    private readonly userService: UserService,
-    private readonly router: Router,
-    private readonly loadingService: LoadingService
-    ) {}
+export class MainViewComponent implements OnInit {
+  constructor (private readonly userService: UserService) {}
+  readonly users$ = this.userService.getUsers$();
+  onLoadUsers() {
+    this.userService.loadUsers();
+  }
+
+    trackById(index:number, user: User) {
+    return user.id;
+  }
+
+  readonly str$ = new Subject();
+  readonly #value$ = new BehaviorSubject('');
+  private readonly roleService = inject(RoleService);
+  readonly role$ = this.roleService.getRole$();
+
+
+  
+  onToggleRole() {
+    const role = this.roleService.getRole();
+    this.roleService.setRole(role === 'user' ? 'admin' : 'user');
+  }
+
+  get isAdmin () { return this.roleService.isAdmin(); }
 
   ngOnInit() {
-    this.postService.loadPosts$()
-      .pipe(
-        takeUntil(this.destroy$)
-      )
-      .subscribe()
-      this.userSubscription = this.userService.getUser$().subscribe(
-        user => this.user = user
-      );
+    const delay = 2_500;
+    interval(delay).pipe(
+      take(1),
+      tap(() => {
+      })
+    ).subscribe(() => this.str$.next(''));
+
+    //
+    interval(delay ).pipe(
+      take(2),
+      tap((v) => v === 0 ? this.#value$.next('') : this.#value$.next('Bye World'))
+    ).subscribe()
   }
 
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-    if (this.userSubscription)
-      this.userSubscription.unsubscribe();
+  get value$() {
+    return this.#value$.asObservable();
   }
-
-  onLogin() {
-    this.userService.login()
-  }
-
-  onLogout() {
-    this.userService.logout();
-  }
-
-  onToggleRole() {
-    const role = this.user.role;
-    const newRole = role === 'admin' ? 'user' : 'admin';
-    this.userService.setRole(newRole);
-  }
-
-  get isLoggedIn() { return this.userService.isLoggedIn() }
-  get isLoggedOut() { return this.userService.isLoggedIn() === false }
-  get isAdmin() { return this.userService.isAdmin() }
-
-  goToAdminPage() {
-    this.router.navigate(['admin'])
-  }
-  readonly capitalize$ = new BehaviorSubject<string>('');
-  isLoading$ = this.loadingService.getState$();
+  
 }
