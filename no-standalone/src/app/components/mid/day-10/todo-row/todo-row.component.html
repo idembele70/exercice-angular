@@ -1,0 +1,5 @@
+<li>
+  <h1>{{todo.title}}</h1>
+  <h2>{{todo.done ? 'Done' : 'Undone'}}</h2>
+  <button type="button" (click)="onToggleTodo()">{{todo.done ? 'Uncomplete' : 'Complete'}} todo</button>
+</li>

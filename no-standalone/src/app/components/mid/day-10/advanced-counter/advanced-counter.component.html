@@ -1,0 +1,5 @@
+<h1>{{ count$ | async }}</h1>
+<div>
+  <button type="button" (click)="onIncrement()" [disabled]="isMax">Increment</button>
+  <button type="button" (click)="onDecrement()" [disabled]="isMin">Decrement</button>
+</div>

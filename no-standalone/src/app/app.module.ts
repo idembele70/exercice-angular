@@ -6,7 +6,7 @@ import { AsyncPipe } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DebounceClickDirective } from './directives/mid/day-03/debounce-click.directive';
+import { DebounceClickDirective } from './directives/mid/day-10/debounce-click.directive';
 import { MainViewComponent } from './components/main-view/main-view.component';
 import { DelayedMessagePipe } from './pipes/mid/day-03/delayed-message.pipe';
 import { LoggedComponent } from './components/mid/day-04/logged/logged.component';
@@ -19,7 +19,7 @@ import { ProductRowComponent } from './components/mid/day-05/product-row/product
 import { HoverColorDirective } from './directives/mid/day-05/hover-color.directive';
 import { TaskFormComponent } from './components/mid/day-05/task-form/task-form.component';
 import { FilterByAgePipe } from './pipes/mid/day-05/filter-by-age.pipe';
-import { RegisterFormComponent } from './components/mid/day-07/register-form/register-form.component';
+import { RegisterFormComponent } from './components/mid/day-10/register-form/register-form.component';
 import { loadingInterceptor } from './interceptors/mid/day-07/loading.interceptor';
 import { UnauthorizedComponent } from './components/mid/day-07/unauthorized/unauthorized.component';
 import { AdminComponent } from './components/mid/day-07/admin/admin.component';
@@ -30,6 +30,10 @@ import { BetterAsyncPipe } from './pipes/mid/day-09/better-async.pipe';
 import { IfRoleDirective } from './directives/mid/day-09/if-role.directive';
 import { UserComponent } from './components/mid/day-09/user/user.component';
 import { SignUpFormComponent } from './components/mid/day-09/sign-up-form/sign-up-form.component';
+import { AdvancedCounterComponent } from './components/mid/day-10/advanced-counter/advanced-counter.component';
+import { CapitilizeWordsPipe } from './pipes/mid/day-10/capitilize-words.pipe';
+import { TodoListComponent } from './components/mid/day-10/todo-list/todo-list.component';
+import { TodoRowComponent } from './components/mid/day-10/todo-row/todo-row.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +60,11 @@ import { SignUpFormComponent } from './components/mid/day-09/sign-up-form/sign-u
     BetterAsyncPipe,
     IfRoleDirective,
     UserComponent,
-    SignUpFormComponent
+    SignUpFormComponent,
+    AdvancedCounterComponent,
+    CapitilizeWordsPipe,
+    TodoListComponent,
+    TodoRowComponent,
   ],
   imports: [
     BrowserModule,

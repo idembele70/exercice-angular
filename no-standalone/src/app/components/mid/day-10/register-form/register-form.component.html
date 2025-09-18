@@ -1,0 +1,18 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div>
+    <input type="text" placeholder="Enter your email" autocomplete="email" name="email" formControlName="email"><br>
+    <span *ngIf="email?.dirty && email?.hasError('email')">Please provide a valid email</span>
+    <span *ngIf="email?.hasError('emailExists')">This email is already taken</span>
+  </div>
+  <div>
+    <input type="password" placeholder="Enter your password" autocomplete="new-password" name="password" formControlName="password"><br>
+    <span *ngIf="password?.dirty && password?.hasError('minlength')">The password minimum length is 8</span>
+  </div>
+  <div>
+    <input type="password" placeholder="Enter your password confirmation" autocomplete="off" name="confirm-password" formControlName="confirmPassword"><br>
+    <span *ngIf="confirmPassword?.dirty && confirmPassword?.hasError('minlength')">The password minimum length is 8</span>
+  </div>
+  <span *ngIf="isPasswordMisMatch">Your password & confirm password fields values doesn't match</span><br><br>
+  <input type="submit" [disabled]="isFormInvalidOrPending">
+</form>
+<pre>{{ data$ | async }}</pre>

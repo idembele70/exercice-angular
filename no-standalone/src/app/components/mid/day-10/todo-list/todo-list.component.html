@@ -1,0 +1,8 @@
+<form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+  <input type="text" autocomplete="off" name="title" placeholder="Enter a todo title" formControlName="title">
+  <button type="submit" [disabled]="notValid">Add</button><br> 
+  <span *ngIf="title?.hasError('titleExists')">An todo with this title already exists</span>
+</form>
+<ul>
+  <app-todo-row *ngFor="let todo of (todos$ | async) trackBy: trackById" [todo]="todo"></app-todo-row>
+</ul>

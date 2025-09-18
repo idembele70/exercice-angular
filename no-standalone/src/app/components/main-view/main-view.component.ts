@@ -54,5 +54,8 @@ export class MainViewComponent implements OnInit {
   get value$() {
     return this.#value$.asObservable();
   }
-  
+
+  onDebounceClick() {
+    console.log('Emit');
+  }
 }

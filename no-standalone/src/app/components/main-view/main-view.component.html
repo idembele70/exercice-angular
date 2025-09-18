@@ -1,15 +1,8 @@
-<h1>String: {{ str$ | async }}</h1>
-<h1>Undefined in interpolation return this => {{ undefined }}</h1>
+<app-register-form></app-register-form>
 <hr>
-<app-counter></app-counter>
+<app-todo-list></app-todo-list>
+<h1>{{ 'bonjour angular developer' | capitilizeWords }}</h1>
+<button type="button" appDebounceClick (debouncedClick)="onDebounceClick()">Click Me</button>
 <hr>
-<h1>{{ value$ | betterAsync}}</h1>
-<hr>
-<button (click)="onToggleRole()">Click ME to become {{ isAdmin ? 'a user' : 'an admin' }}</button>
-<h1 appIfRole>Only admin can see this content</h1>
-<hr>
-<button type="button" (click)="onLoadUsers()">Load users</button>
-<ul>
-  <app-user *ngFor="let user of (users$ | async);" [username]="user.username" [id]="user.id"></app-user>
-</ul>
-<app-sign-up-form></app-sign-up-form>
+<app-advanced-counter></app-advanced-counter>
+
