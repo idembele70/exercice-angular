@@ -1,0 +1,5 @@
+<ul class="list-group p-2 c-">
+  <li class="list-group-item w-50" role="button" *ngFor="let user of (users$ | async)" appHoverClass="text-bg-primary">
+    {{ user.firstName | capitalizeName }} {{ user.lastName | uppercase }}
+  </li>
+</ul>

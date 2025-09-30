@@ -1,0 +1,38 @@
+<form [formGroup]="registerForm" class="row w-50 p-2 mx-auto mb-2 justify-content-center" (ngSubmit)="onSubmit()">
+  <div class="row mb-3 justify-content-center">
+    <div class="col-6">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" autocomplete="email" id="email" formControlName="email">
+      <div *ngIf="email?.dirty && email?.invalid" class="text-danger">
+        Please provide a valid email
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3 justify-content-center">
+    <div class="col-6">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" autocomplete="new-password" id="password" formControlName="password">
+      <div *ngIf="password?.dirty && password?.invalid" class="text-danger">
+        Please provide a valid password
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3 justify-content-center">
+    <div class="col-6">
+      <label for="confirmPassword" class="form-label">Confirm password</label>
+      <input type="text" class="form-control" autocomplete="off" id="confirmPassword" formControlName="confirmPassword">
+      <div *ngIf="confirmPassword?.dirty && confirmPassword?.invalid" class="text-danger">
+        Please provide a valid password
+      </div>
+      <div *ngIf="misMatchPassword" class="text-danger">
+        Your passwords are different.
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-4 d-flex justify-content-center">
+      <button class="btn btn-success" type="submit" [disabled]="!registerForm.valid">Submit</button>
+    </div>
+  </div>
+</form>
+<pre>{{ data$ | async }}</pre>

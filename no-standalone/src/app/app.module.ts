@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
-import { AsyncPipe } from '@angular/common';
+import { HttpClientModule, provideHttpClient, withInterceptors, HTTP_INTERCEPTORS, withInterceptorsFromDi } from '@angular/common/http';
+import { AsyncPipe, NgIf } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,6 +34,14 @@ import { AdvancedCounterComponent } from './components/mid/day-10/advanced-count
 import { CapitilizeWordsPipe } from './pipes/mid/day-10/capitilize-words.pipe';
 import { TodoListComponent } from './components/mid/day-10/todo-list/todo-list.component';
 import { TodoRowComponent } from './components/mid/day-10/todo-row/todo-row.component';
+import { CapitalizeNamePipe } from './pipes/mid/day-11/capitalize-name.pipe';
+import { UserListComponent } from './components/mid/day-11/user-list/user-list.component';
+import { HoverClassDirective } from './directives/mid/day-11/hover-class.directive';
+import { LoginComponent as Day11LoginComponent } from './components/mid/day-11/login/login.component';
+import { ProfileComponent } from './components/mid/day-11/profile/profile.component';
+import { PostListComponent } from './components/mid/day-11/post/post-list.component';
+import { AuthInterceptor } from './interceptors/mid/day-11/auth.interceptor';
+import { RegisterComponent } from './components/mid/day-11/register/register.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +73,13 @@ import { TodoRowComponent } from './components/mid/day-10/todo-row/todo-row.comp
     CapitilizeWordsPipe,
     TodoListComponent,
     TodoRowComponent,
+    CapitalizeNamePipe,
+    UserListComponent,
+    HoverClassDirective,
+    Day11LoginComponent,
+    ProfileComponent,
+    PostListComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,13 +87,18 @@ import { TodoRowComponent } from './components/mid/day-10/todo-row/todo-row.comp
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
+    NgIf
   ],
   providers: [
     provideHttpClient(
-      withInterceptors([loadingInterceptor]),
+      withInterceptorsFromDi()
     ),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     AsyncPipe,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [
+    CapitalizeNamePipe
+  ]
 })
 export class AppModule { }
